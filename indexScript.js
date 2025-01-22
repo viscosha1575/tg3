@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Переход к игровому интерфейсу или началу игры
         alert("Игра началась!");
         // Здесь можно вызвать логику для перехода на другую страницу
-        window.location.href = "game.html"; // Укажите путь к странице игры
+        window.location.href = "gameMain.html"; // Укажите путь к странице игры
     }
 
     // Обработчик кнопки "Play"
