@@ -78,9 +78,41 @@ document.addEventListener("DOMContentLoaded", function () {
         progressCircle.style.strokeDashoffset = offset;
     }
 
+    async function sendGameDataToServer() {
+        try {
+            const tg = window.Telegram.WebApp;
+            const user = tg.initDataUnsafe?.user || {};
+
+            const gameData = {
+                userId: user.id || "unknown",
+                username: user.username || "anonymous",
+                score: score,
+                timeLeft: timeLeft
+            };
+
+            const response = await fetch('https://servertg.onrender.com/api/saveUserData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(gameData)
+            });
+
+            if (response.ok) {
+                console.log('Game data successfully sent to the server!');
+            } else {
+                console.error('Failed to send game data:', await response.text());
+            }
+        } catch (error) {
+            console.error('Error sending game data to the server:', error);
+        }
+    }
+
     function endGame() {
         alert("Game Over! Your score is " + score);
+        sendGameDataToServer(); // Отправка данных на сервер после окончания игры
     }
 
     startGame();
 });
+
