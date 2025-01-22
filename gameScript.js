@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
+ const tg = window.Telegram.WebApp;
+
+    if (!tg) {
+        console.error("Telegram WebApp API is not available.");
+        alert("Please open this application through Telegram.");
+        return;
+    }
+
+    tg.ready(); // Уведомляем Telegram, что приложение готово
+    tg.expand(); // Расширяем приложение
     const grid = document.getElementById("grid");
     const timerDisplay = document.getElementById("timer");
     const scoreDisplay = document.getElementById("score"); // Убедитесь, что это поле существует
